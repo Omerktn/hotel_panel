@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<article class="media content-section">
+    <div class="media-body">
+        <h3 class="h3">Dolu odalar</h3>
+        {% for tri_info in hotel_info %}
+        <ul class="oda-bilgi list-group list-group-horizontal">
+            {% for info in tri_info %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <b> {{ info[0] }} &nbsp</b>
+                <b> {{ info[1] }} &nbsp</b>
+                <span class="badge badge-info"> {{ info[2] }} </span>
+                <b></b>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </br>
+    <b>İçerideki müşteri sayısı: {{ num_cust }}</b>
+    </div>
+</article>
+
+<article class="media content-section">
+    <div class="media-body">
+        <h3 class="h3">Online rezervasyonlar</h3>
+        {% for tri_info in o_info %}
+        <ul class="oda-bilgi list-group list-group-horizontal">
+            {% for info in tri_info %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <b> {{ info[0] }} &nbsp</b>
+                <b> {{ info[1] }} &nbsp</b>
+                <span class="badge badge-warning"> {{ info[2] }} </span>
+                <b></b>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </br>
+    <b>Rezervasyon yapan müşteri sayısı: {{ num_online }}</b>
+    </div>
+</article>
+
+<article class="media content-section">
+    <div class="media-body">
+        <h3 class="h3">Çalışan görevliler</h3>
+        Test
+    </div>
+</article>
+
+{% endblock content %}

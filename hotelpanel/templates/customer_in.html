@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section">
+    <div class="media">
+        <div class="media-body">
+            <p class="text-secondary">{{ current_user.username }} olarak bağlandınız.</p>
+        </div>
+    </div>
+    <form method="POST", action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="row">
+            <div class="col-sm-6">
+        <div class="form-group">
+            {{ form.tckn.label(class="form-control-label") }}
+            {% if form.tckn.errors %}
+            {{ form.tckn(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.tckn.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.tckn(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+            </div>
+
+            <div class="col-sm-6">
+        <div class="form-group">
+            {{ form.phone.label(class="form-control-label") }}
+            {% if form.phone.errors %}
+            {{ form.phone(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.phone.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.phone(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+        <div class="form-group">
+            {{ form.fname.label(class="form-control-label") }}
+            {% if form.fname.errors %}
+            {{ form.fname(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.fname.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.fname(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+            </div>
+
+            <div class="col-sm-6">
+        <div class="form-group">
+            {{ form.sname.label(class="form-control-label") }}
+            {% if form.sname.errors %}
+            {{ form.sname(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.sname.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.sname(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+        <div class="form-group">
+            {{ form.checkin.label(class="form-control-label") }}
+            {% if form.checkin.errors %}
+            {{ form.checkin(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.checkin.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.checkin(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+            </div>
+
+            <div class="col-sm-6">
+        <div class="form-group">
+            {{ form.checkout.label(class="form-control-label") }}
+            {% if form.checkout.errors %}
+            {{ form.checkout(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.checkout.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.checkout(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.room.label(class="form-control-label") }}
+            {% if form.room.errors %}
+            {{ form.room(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.room.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.room(class="custom-input form-control form-control-lg", value=room_suggest, id="room-num-area") }}
+
+            {% endif %}
+        </div>
+
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}

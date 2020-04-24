@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<article class="media content-section">
+    <div class="media-body">
+        <h3 class="h3">Müşteri Bilgisi</h3>
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">TCKN</th>
+                    <th scope="col">Ad Soyad</th>
+                    <th scope="col">Telefon No.</th>
+                    <th scope="col">Kart No</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for info in cust_list %}
+                <tr>
+                    <th scope="row">{{ info.tckn }}</th>
+                    <td>{{ info.fname }} {{ info.sname }}</td>
+                    <td>{{ info.phone }}</td>
+                    <td>{{ info.card_num }}</td>
+                </tr>
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</article>
+
+{% endblock content %}

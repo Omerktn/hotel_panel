@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<article class="media content-section">
+    <div class="media-body">
+        <h3 class="h3">Çalışan görevliler</h3>
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">TCKN</th>
+                    <th scope="col">Ad Soyad</th>
+                    <th scope="col">Pozisyon</th>
+                    <th scope="col">Maaş</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for info in staff_list %}
+                <tr>
+                    <th scope="row">{{ info.tckn }}</th>
+                    <td>{{ info.fname }} {{ info.sname }}</td>
+                    <td>{{ info.position }}</td>
+                    <td>{{ info.salary/10000 }} &#8378;</td>
+                </tr>
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</article>
+
+{% endblock content %}
