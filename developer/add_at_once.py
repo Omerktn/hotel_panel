@@ -25,7 +25,8 @@ for rm_num in range(1001, 1095):
     db.session.add(new_room)
 
 for idx, cust in enumerate(custlist[:7]):
-    book = Booking(room=1001+idx, checkin=datetime.date.today(), checkout=datetime.date.today(), is_online=False)
+    book = Booking(room=1001+idx, checkin=datetime.date.today(), checkout=datetime.date.today(),
+                   is_online=False, is_cancelled=False)
 
     Room.query.filter_by(id=1001+idx).first().is_full = True
     cust.is_inside = True

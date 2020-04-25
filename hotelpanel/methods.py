@@ -4,7 +4,11 @@ from sqlalchemy import desc, asc
 
 def get_staff_as_select():
     staff_select = [("none", "- (Yok)")]
-    q = Staff.query.all()
+    try:
+        q = Staff.query.all()
+    except:
+        print("Staff excepted")
+        q = []
     for person in q:
         staff_select.append((str(person.tckn), "{} {}".format(person.fname, person.sname)))
     return staff_select
@@ -44,7 +48,7 @@ def get_reserved_customers():
     cust_and_room = []
     custs = Customer.query.filter_by(is_inside=False).all()
     for cust in custs:
-        if len(cust.bookings) and cust.bookings[-1].is_online:
+        if len(cust.bookings) and cust.bookings[-1].is_online and not cust.bookings[-1].is_cancelled:
             cust_and_room.append([cust.fname, cust.sname,
                                   Room.query.filter_by(id=cust.bookings[-1].room).first().id])
     return cust_and_room
@@ -62,7 +66,7 @@ def get_max_room_number():
 
 
 def get_min_empty_room_number():
-    room = Room.query.filter_by(is_full=0).order_by(asc(Room.id)).first()
+    room = Room.query.filter_by(is_full=0, reserv_date=None).order_by(asc(Room.id)).first()
     if room:
         return room.id
     return None

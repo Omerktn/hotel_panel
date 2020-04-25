@@ -40,8 +40,13 @@ class AddStaffForm(FlaskForm):
             raise ValidationError('Bu çalışan zaten bulunmakta.')
 
 
+class CustomerCancelForm(FlaskForm):
+    tckn = IntegerField("T.C. Kimlik Numarası", validators=[DataRequired()])
+    submit = SubmitField("İptal Talep Et")
+
+
 class CustomerBookingForm(FlaskForm):
-    tckn = IntegerField('T.C. Kimlik Numarası', validators=[DataRequired()])
+    tckn = IntegerField('T.C. Kimlik No', validators=[DataRequired()])
     fname = StringField('Ad', validators=[DataRequired()])
     sname = StringField('Soyad')
     startdate = DateField('Başlangıç Tarihi', default=datetime.date.today, format='%d-%m-%Y',
@@ -51,6 +56,9 @@ class CustomerBookingForm(FlaskForm):
     num_of_people = SelectField("Kişi Sayısı", choices=[("1", "1"),
                                                         ("2", "2"),
                                                         ("3", "3")])
+    phone = StringField("Telefon Numarası", default="+90")
+    room_type = SelectField("Oda Tipi", choices=[("standart", "Standart"),
+                                                 ("lux", "Lüks")])
     submit = SubmitField("Rezervasyon yap")
 
     def validate_tckn(self, tckn):

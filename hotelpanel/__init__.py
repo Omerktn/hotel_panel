@@ -14,4 +14,5 @@ login_manager = LoginManager(APP)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
+from hotelpanel import models
 from hotelpanel import routes

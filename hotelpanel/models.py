@@ -32,12 +32,8 @@ class Booking(db.Model):
     room = db.Column(db.Integer, db.ForeignKey("room.id"), nullable=False)
     checkin = db.Column(db.Date)
     checkout = db.Column(db.Date)
-    is_online = db.Column(db.Boolean)
-
-
-class StaffChain(db.Model):
-    person = db.Column(db.Integer, db.ForeignKey("staff.id"), primary_key=True)
-    superviser = db.Column(db.Integer, db.ForeignKey("staff.id"), primary_key=True)
+    is_online = db.Column(db.Boolean, default=False)
+    is_cancelled = db.Column(db.Boolean, default=False)
 
 
 class Staff(db.Model):
@@ -47,6 +43,11 @@ class Staff(db.Model):
     sname = db.Column(db.String(60), nullable=True)
     position = db.Column(db.String(60))
     salary = db.Column(db.Integer)
+
+
+class StaffChain(db.Model):
+    person = db.Column(db.Integer, db.ForeignKey("staff.id"), primary_key=True)
+    superviser = db.Column(db.Integer, db.ForeignKey("staff.id"), primary_key=True)
 
 
 class Room(db.Model):

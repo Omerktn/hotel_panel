@@ -53,3 +53,33 @@
 [Yönetici|-id; -kullanıcı_adı; -parola; ]
 
 [Otel_Kaydı|-id; +oda; +giriş_tarihi; +çıkış_tarihi; +online_mı]
+
+
+
+
+
+
+// Cool Class Diagram
+// ------------------
+
+// Chain elements like this
+[Müşteri]++1-0..✱>[Otel_Kaydı]
+[Çalışan]++1-1>[Çalışan_ilişki]
+[Otel_Kaydı]->[Oda]
+[Yönetici]-Ekler/Çıkartır>[Müşteri]
+[Yönetici]-Yönetir>[Çalışan]
+
+// Add notes
+//[Order]-[note: Aggregate Root ala DDD{bg:wheat}]
+
+// Add more detail
+[Müşteri|-tc_kimlik_no; +ad_soyad; +kart_num; +telefon_num; +içeride_mi; +bulunma_sayısı |+müşteriGiriş();+müşteriÇıkış();+bilgileri_doğrula()]
+
+[Oda|-id; +kapasite; +dolu_mu; +rezerve_tarihi;]
+
+[Çalışan|-tc_kimlik_no; +ad_soyad; +pozisyon; +maaş;]
+[Çalışan_ilişki|+çalışan_id; +süpervizor_id;]
+
+[Yönetici|-id; -kullanıcı_adı; -parola; ]
+
+[Otel_Kaydı|-id; +oda; +giriş_tarihi; +çıkış_tarihi; +online_mı]

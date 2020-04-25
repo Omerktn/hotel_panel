@@ -6,7 +6,7 @@ from flask_login import current_user, login_user, logout_user
 from hotelpanel import APP, bcrypt, db
 from hotelpanel.forms import (AddRoomForm, AddStaffForm, CustomerBookingForm,
                               CustomerInForm, CustomerOutForm, LoginForm,
-                              RegistrationForm)
+                              RegistrationForm, CustomerCancelForm)
 from hotelpanel.methods import (get_customers_rooms, get_max_room_number,
                                 get_min_empty_room_number,
                                 number_of_customer_inside, get_reserved_customers,
@@ -32,6 +32,21 @@ def staff_info():
     return render_template("staff_info.html", title="Çalışan Bilgileri", staff_list=get_all_staff())
 
 
+@APP.route("/cancelbook", methods=['GET', 'POST'])
+def cancel_book():
+    form = CustomerCancelForm()
+
+    if form.validate_on_submit():
+        tckn = form.tckn.data
+        cust = Customer.query.filter_by(tckn=tckn).first()
+        if cust and cust.bookings:
+            cust.bookings[-1].is_cancelled = True
+            db.session.commit()
+
+        return render_template("book_cancel_info.html", title="İptal Talebi Başarılı")
+    return render_template("book_cancel.html", title="Rezervasyon İptali", form=form)
+
+
 @APP.route("/rezervasyon", methods=['GET', 'POST'])
 @APP.route("/booking", methods=['GET', 'POST'])
 def book_room():
@@ -41,9 +56,9 @@ def book_room():
         e_room = get_min_empty_room_number()
 
         cust = Customer(tckn=form.tckn.data, fname=form.fname.data, sname=form.sname.data,
-                        is_inside=False)
+                        is_inside=False, phone=form.phone.data)
         book = Booking(room=e_room, checkin=form.startdate.data,
-                       checkout=form.enddate.data, is_online=True)
+                       checkout=form.enddate.data, is_online=True, is_cancelled=False)
 
         if Customer.query.filter_by(tckn=cust.tckn).all():
             cust = Customer.query.filter_by(tckn=cust.tckn).first()
@@ -146,7 +161,7 @@ def customer_in():
         cust = Customer(tckn=form.tckn.data, fname=form.fname.data, sname=form.sname.data,
                         is_inside=True, phone=form.phone.data)
         book = Booking(room=form.room.data, checkin=form.checkin.data, checkout=form.checkout.data,
-                       is_online=False)
+                       is_online=False, is_cancelled=False)
 
         if Customer.query.filter_by(tckn=cust.tckn).all():
             flash(f"Müşterimizin ilk seferi değil.")
