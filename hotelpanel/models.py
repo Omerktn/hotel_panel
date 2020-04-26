@@ -55,6 +55,7 @@ class Room(db.Model):
     capacity = db.Column(db.Integer, default=1)
     is_full = db.Column(db.Boolean)
     reserv_date = db.Column(db.Date, nullable=True, default=None)
+    type = db.Column(db.String, nullable=True)
 
 
 class User(db.Model, UserMixin):
