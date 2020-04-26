@@ -41,6 +41,7 @@ def cancel_book():
         cust = Customer.query.filter_by(tckn=tckn).first()
         if cust and cust.bookings:
             cust.bookings[-1].is_cancelled = True
+
             db.session.commit()
 
         return render_template("book_cancel_info.html", title="İptal Talebi Başarılı")

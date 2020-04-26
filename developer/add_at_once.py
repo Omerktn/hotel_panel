@@ -21,7 +21,7 @@ for i in range(len(fnames)):
     db.session.add(cust)
 
 for rm_num in range(1001, 1095):
-    new_room = Room(id=rm_num, capacity=2, is_full=False, reserv_date=None)
+    new_room = Room(id=rm_num, capacity=2, is_full=False, reserv_date=None, type="standart")
     db.session.add(new_room)
 
 for idx, cust in enumerate(custlist[:7]):
