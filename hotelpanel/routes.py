@@ -13,17 +13,6 @@ from hotelpanel.methods import (get_customers_rooms, get_max_room_number,
                                 number_of_online_books, get_all_staff, get_all_customers)
 from hotelpanel.models import Booking, Customer, Room, Staff, User
 
-posts = [
-    {"title": "Domatesin faydaları!",
-     "author": "omerktn",
-     "content": "Bol vitamin-C içerir",
-     "date_posted": "12 Nisan, 2020"},
-    {"title": "Otel açılıyor!",
-     "author": "admin",
-     "content": "Uludağ Vadi Otelleri yakında hizmetinizde.",
-     "date_posted": "09 Mayıs, 2020"}
-]
-
 
 @APP.route("/staffinfo", methods=['GET', 'POST'])
 def staff_info():
